@@ -52,11 +52,27 @@ def lookup_plant(plant_name: str) -> dict:
 
     Before writing code, complete the lookup_plant section of specs/tool-functions-spec.md.
     """
-    return {
-        "found": False,
-        "name": plant_name,
-        "message": "Plant lookup not yet implemented. Complete Milestone 1.",
-    }
+
+    # Normalize query plant name
+    norm_plant = plant_name.strip().lower()
+
+    # Create dictionary of aliases
+    newdct = dict()
+    # Alias Matching
+    for key in _plant_db.keys():
+        for alias in _plant_db[key]["aliases"]:
+            newdct[alias] = key
+
+    # Direct Plant Match | Display name match
+    if norm_plant in newdct.keys():
+        return {"found": True, "plant": newdct[norm_plant]}
+
+    # Plant not found
+    else:
+        return {"found": False, "name": plant_name, "message": f"The user-requested plant: {norm_plant}, is not in the database. "
+        "Please ask them to refer to the list of plants available in the database on the app's main page. Please ask the user if "
+        "they possibly misspelled the plant name, since this may be the case. Make note of the plant you just asked for, do not consider "
+        "it again in your 4-step reACT loop.",}
 
 
 def get_seasonal_conditions(season: str | None = None) -> dict:
@@ -84,3 +100,7 @@ def get_seasonal_conditions(season: str | None = None) -> dict:
     result = dict(_season_data[season_key])
     result["detected_season"] = detected
     return result
+
+print("Debug")
+print(lookup_plant("devil's ivy"))
+print(lookup_plant("SNAKE PLANT"))

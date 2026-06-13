@@ -73,7 +73,7 @@ the broadest net, so they go last.
 *Aliases are stored as a list of strings. How will you check if the normalized input matches any alias in the list? Write your approach in pseudocode or plain English.*
 
 ```
-[your answer here]
+Create a dictionary of all the aliases as keys that have a key value to their designated plant. We loop through the dictionary and access the plant when the word the user used is found.
 ```
 
 ---
@@ -83,7 +83,7 @@ the broadest net, so they go last.
 *When a plant isn't found, the agent will read your message and use it to decide what to tell the user. Write the exact string you'll return — make it useful to the agent, not just to a human reading logs.*
 
 ```
-[your answer here]
+The user-requested plant: plant_name, is not in the database. Please ask them to refer to the list of plants available in the database on the app's main page. Please ask the user if they possibly misspelled the plant name, since this may be the case. Make note of the plant you just asked for, do not consider it again in your 4-step reACT loop.
 ```
 
 ---
@@ -94,7 +94,7 @@ the broadest net, so they go last.
 
 **Test: does `"devil's ivy"` return the pothos entry?**
 ```
-[yes / no — if no, describe what happened]
+yes
 ```
 
 **Test: does `"SNAKE PLANT"` return the snake plant entry?**
